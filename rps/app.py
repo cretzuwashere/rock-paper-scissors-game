@@ -5,6 +5,7 @@ import sys
 import threading
 from .core.config import Config
 from .core.world import World
+from .core.language import Language
 from .ui.hud import HUD
 from .ui.victory_screen import VictoryScreen
 from .analysis.logger import AnalysisLogger
@@ -35,9 +36,10 @@ class RPSApp:
         
         # Initialize components
         self.logger = AnalysisLogger() if self.config.log_events else None
+        self.language = Language(self.config.language)
         self.world = World(self.config, self.logger)
-        self.hud = HUD(self.config)
-        self.victory_screen = VictoryScreen()
+        self.hud = HUD(self.config, self.language)
+        self.victory_screen = VictoryScreen(self.language)
         
         # API spawn queue
         self.spawn_queue = SpawnQueue() if api_enabled else None
@@ -81,28 +83,35 @@ class RPSApp:
         
         elif event.key == pygame.K_SPACE:
             self.world.paused = not self.world.paused
-            status = "Paused" if self.world.paused else "Resumed"
+            status = self.language.get('paused_msg') if self.world.paused else self.language.get('resumed')
             self.show_message(status)
         
         elif event.key == pygame.K_c:
             count = self.world.get_total_count()
             self.world.clear()
-            self.show_message(f"Cleared {count} agents")
+            self.show_message(f"{self.language.get('cleared')} {count} {self.language.get('agents')}")
         
         elif event.key == pygame.K_d:
             self.world.debug_mode = not self.world.debug_mode
-            status = "ON" if self.world.debug_mode else "OFF"
-            self.show_message(f"Debug mode: {status}")
+            status = self.language.get('debug_on') if self.world.debug_mode else self.language.get('debug_off')
+            self.show_message(status)
         
         elif event.key == pygame.K_h:
             self.config.enable_steering = not self.config.enable_steering
-            status = "ON" if self.config.enable_steering else "OFF"
-            self.show_message(f"Hunting behavior: {status}")
+            status = self.language.get('hunting_on') if self.config.enable_steering else self.language.get('hunting_off')
+            self.show_message(status)
         
         elif event.key == pygame.K_n:
             self.config.show_names = not self.config.show_names
-            status = "ON" if self.config.show_names else "OFF"
-            self.show_message(f"Names: {status}")
+            status = self.language.get('names_on_msg') if self.config.show_names else self.language.get('names_off_msg')
+            self.show_message(status)
+        
+        elif event.key == pygame.K_l:
+            # Toggle language
+            new_lang = 'ro' if self.config.language == 'en' else 'en'
+            self.config.language = new_lang
+            self.language.set_language(new_lang)
+            self.show_message(self.language.get('lang_changed'))
         
         elif event.key == pygame.K_F5:
             # Reset with new seed and spawn initial population
@@ -114,41 +123,41 @@ class RPSApp:
             # Auto-spawn balanced population
             self.world.spawn_batch()
             
-            self.show_message(f"New seed: {new_seed} - Spawned balanced population")
+            self.show_message(f"{self.language.get('new_seed_msg')}: {new_seed} - {self.language.get('spawned_balanced')}")
         
         elif event.key == pygame.K_F9:
             if self.logger:
                 spawn_file, collision_file = self.logger.export_csv()
                 print(f"Exported to:\n  {spawn_file}\n  {collision_file}")
-                self.show_message("Analysis exported!")
+                self.show_message(self.language.get('exported'))
             else:
                 self.show_message("Logging disabled")
         
         # Spawn at mouse position
         elif event.key == pygame.K_r:
             self.world.spawn('rock', mouse_pos)
-            self.show_message("Spawned Rock")
+            self.show_message(f"{self.language.get('spawned')} {self.language.get('rock')}")
         
         elif event.key == pygame.K_p:
             self.world.spawn('paper', mouse_pos)
-            self.show_message("Spawned Paper")
+            self.show_message(f"{self.language.get('spawned')} {self.language.get('paper')}")
         
         elif event.key == pygame.K_s:
             self.world.spawn('scissors', mouse_pos)
-            self.show_message("Spawned Scissors")
+            self.show_message(f"{self.language.get('spawned')} {self.language.get('scissors')}")
         
         # Batch spawn
         elif event.key == pygame.K_1:
             count = len(self.world.spawn_random('rock', self.config.spawn_batch_size))
-            self.show_message(f"Spawned {count} Rocks")
+            self.show_message(f"{self.language.get('spawned')} {count} {self.language.get('rocks')}")
         
         elif event.key == pygame.K_2:
             count = len(self.world.spawn_random('paper', self.config.spawn_batch_size))
-            self.show_message(f"Spawned {count} Papers")
+            self.show_message(f"{self.language.get('spawned')} {count} {self.language.get('papers')}")
         
         elif event.key == pygame.K_3:
             count = len(self.world.spawn_random('scissors', self.config.spawn_batch_size))
-            self.show_message(f"Spawned {count} Scissors")
+            self.show_message(f"{self.language.get('spawned')} {count} {self.language.get('scissors')}")
         
         # Random spawn with different counts per faction
         elif event.key == pygame.K_b:
@@ -161,7 +170,7 @@ class RPSApp:
             p = len(self.world.spawn_random('paper', paper_count))
             s = len(self.world.spawn_random('scissors', scissors_count))
             
-            self.show_message(f"Random Spawn: {r} Rocks, {p} Papers, {s} Scissors")
+            self.show_message(f"{self.language.get('random_spawn_msg')}: {r} {self.language.get('rocks')}, {p} {self.language.get('papers')}, {s} {self.language.get('scissors')}")
     
     def _handle_mouse_click(self, pos):
         """Handle mouse click events.

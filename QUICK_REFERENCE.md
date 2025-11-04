@@ -29,6 +29,7 @@ python run_tests.py
 | **Space** | Pause/Resume |
 | **H** | Toggle hunting |
 | **N** | Toggle names display ⭐ |
+| **L** | Toggle language (EN ↔ RO) ⭐ |
 | **C** | Clear all / Reset victory |
 | **D** | Debug mode |
 | **F5** | New seed + auto-spawn ⭐ |
@@ -80,6 +81,12 @@ python run_tests.py
 - Press F5 to generate new random seed
 - Automatically spawns balanced population (10 of each)
 - Quick way to start fresh games
+
+### 8. Multilingual Support (L)
+- Press L to toggle between English and Romanian
+- All UI elements translate instantly
+- Victory screen, HUD, messages all localized
+- Supports: English (EN) and Romanian (RO) 🌍
 
 ---
 
@@ -238,6 +245,7 @@ python -m rps.app --seed 100 --api-enabled
 - ✅ Clueless prey
 - ✅ Random spawn (B)
 - ✅ Auto-spawn on seed change (F5)
+- ✅ Multilingual support (English/Romanian)
 - ✅ All tests passing
 - ✅ Ready to play!
 

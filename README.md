@@ -3,6 +3,8 @@
 A Python application with a graphical interface that simulates a Rock–Paper–Scissors world where objects move and interact according to the classic game rules.
 
 > **New here?** Check out **[START_HERE.md](START_HERE.md)** for a quick 3-step guide! 🚀
+> 
+> **Română?** Vezi **[README.ro.md](README.ro.md)** pentru versiunea în limba română! 🇷🇴
 
 ## Features
 
@@ -14,7 +16,8 @@ A Python application with a graphical interface that simulates a Rock–Paper–
 - **Global hunting** - Agents hunt prey across the entire board (no range limit) 🎯
 - **Clueless prey** - Prey acts unaware of danger (no flee behavior) 😴
 - **Factory pattern** - Clean, extensible agent creation system
-- **Random spawn** - Press `B` for random numbers of each faction (10-40 each)
+- **Random spawn** - Press `B` for random numbers of each faction (30-60 each)
+- **Multilingual support** - Toggle between English and Romanian with `L` key 🌍
 - Collision-based interactions following classic R-P-S rules
 - Real-time visualization with Pygame
 - Toggleable hunting mode (press `H`)

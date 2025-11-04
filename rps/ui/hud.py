@@ -7,13 +7,15 @@ from typing import Dict
 class HUD:
     """Heads-up display for game information."""
     
-    def __init__(self, config):
+    def __init__(self, config, language):
         """Initialize the HUD.
         
         Args:
             config: Game configuration
+            language: Language manager
         """
         self.config = config
+        self.language = language
         self.font_large = None
         self.font_small = None
         self.font_tiny = None
@@ -69,32 +71,32 @@ class HUD:
         paper_color = self.config.color_paper
         scissors_color = self.config.color_scissors
         
-        text = self.font_small.render(f"Rock:", True, (200, 200, 200))
+        text = self.font_small.render(f"{self.language.get('rock')}:", True, (200, 200, 200))
         surface.blit(text, (x, y))
         count_text = self.font_small.render(f"{counts.get('rock', 0)}", True, rock_color)
-        surface.blit(count_text, (x + 80, y))
+        surface.blit(count_text, (x + 100, y))
         y += line_height
         
-        text = self.font_small.render(f"Paper:", True, (200, 200, 200))
+        text = self.font_small.render(f"{self.language.get('paper')}:", True, (200, 200, 200))
         surface.blit(text, (x, y))
         count_text = self.font_small.render(f"{counts.get('paper', 0)}", True, paper_color)
-        surface.blit(count_text, (x + 80, y))
+        surface.blit(count_text, (x + 100, y))
         y += line_height
         
-        text = self.font_small.render(f"Scissors:", True, (200, 200, 200))
+        text = self.font_small.render(f"{self.language.get('scissors')}:", True, (200, 200, 200))
         surface.blit(text, (x, y))
         count_text = self.font_small.render(f"{counts.get('scissors', 0)}", True, scissors_color)
-        surface.blit(count_text, (x + 80, y))
+        surface.blit(count_text, (x + 100, y))
         y += line_height
         
         # Total
         total = sum(counts.values())
-        text = self.font_small.render(f"Total: {total}", True, (255, 255, 255))
+        text = self.font_small.render(f"{self.language.get('total')}: {total}", True, (255, 255, 255))
         surface.blit(text, (x, y))
         y += line_height
         
         # Stats
-        text = self.font_small.render(f"Collisions: {total_interactions}", True, (200, 200, 200))
+        text = self.font_small.render(f"{self.language.get('collisions')}: {total_interactions}", True, (200, 200, 200))
         surface.blit(text, (x, y))
         y += line_height
         
@@ -102,31 +104,35 @@ class HUD:
         surface.blit(text, (x, y))
         y += line_height
         
-        text = self.font_small.render(f"Seed: {seed}", True, (200, 200, 200))
+        text = self.font_small.render(f"{self.language.get('seed')}: {seed}", True, (200, 200, 200))
         surface.blit(text, (x, y))
         y += line_height
         
         # Status indicators
         if paused:
-            pause_text = self.font_large.render("PAUSED", True, (255, 255, 0))
+            pause_text = self.font_large.render(self.language.get('paused'), True, (255, 255, 0))
             text_rect = pause_text.get_rect(center=(surface.get_width() // 2, 50))
             surface.blit(pause_text, text_rect)
         
         if debug_mode:
-            debug_text = self.font_small.render("DEBUG", True, (0, 255, 0))
+            debug_text = self.font_small.render(self.language.get('debug'), True, (0, 255, 0))
             surface.blit(debug_text, (surface.get_width() - 80, 10))
         
         # Show steering status
-        steering_status = "HUNT ON" if self.config.enable_steering else "HUNT OFF"
+        steering_status = self.language.get('hunt_on') if self.config.enable_steering else self.language.get('hunt_off')
         steering_color = (0, 255, 0) if self.config.enable_steering else (255, 100, 100)
         steering_text = self.font_small.render(steering_status, True, steering_color)
-        surface.blit(steering_text, (surface.get_width() - 100, 40))
+        surface.blit(steering_text, (surface.get_width() - 180, 40))
         
         # Show names status
-        names_status = "NAMES ON" if self.config.show_names else "NAMES OFF"
+        names_status = self.language.get('names_on') if self.config.show_names else self.language.get('names_off')
         names_color = (0, 255, 0) if self.config.show_names else (255, 100, 100)
         names_text = self.font_small.render(names_status, True, names_color)
-        surface.blit(names_text, (surface.get_width() - 110, 70))
+        surface.blit(names_text, (surface.get_width() - 180, 70))
+        
+        # Show language
+        lang_text = self.font_small.render(self.language.get('language'), True, (200, 200, 200))
+        surface.blit(lang_text, (surface.get_width() - 180, 100))
         
         # Controls help (bottom)
         self._draw_controls(surface)
@@ -138,8 +144,8 @@ class HUD:
             surface: Surface to draw on
         """
         help_lines = [
-            "Controls: R/P/S=Spawn at mouse | 1/2/3=Batch spawn | B=Random Spawn | Space=Pause",
-            "H=Toggle Hunt | N=Toggle Names | C=Clear | D=Debug | F9=Export CSV | F5=New seed+spawn | ESC=Quit"
+            self.language.get('controls_line1'),
+            self.language.get('controls_line2')
         ]
         
         y = surface.get_height() - 60

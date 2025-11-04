@@ -39,7 +39,8 @@ class Config:
     agent_detection_range: float = 200.0
     
     # Display options
-    show_names: bool = False  # How far agents can detect others
+    show_names: bool = False
+    language: str = 'en'  # 'en' or 'ro'  # How far agents can detect others
     
     # Spawning
     spawn_batch_size: int = 10

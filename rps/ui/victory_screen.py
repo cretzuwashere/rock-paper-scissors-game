@@ -7,8 +7,13 @@ from typing import List, Tuple
 class VictoryScreen:
     """Displays victory message and scoreboard."""
     
-    def __init__(self):
-        """Initialize the victory screen."""
+    def __init__(self, language):
+        """Initialize the victory screen.
+        
+        Args:
+            language: Language manager
+        """
+        self.language = language
         self.font_title = None
         self.font_subtitle = None
         self.font_scoreboard = None
@@ -41,13 +46,13 @@ class VictoryScreen:
         surface.blit(overlay, (0, 0))
         
         # Winner announcement
-        winner_text = f"{winner_kind.upper()}S WIN!"
+        winner_text = f"{self.language.get(winner_kind + 's').upper()} {self.language.get('win').upper()}"
         title = self.font_title.render(winner_text, True, (255, 215, 0))  # Gold
         title_rect = title.get_rect(center=(surface.get_width() // 2, 100))
         surface.blit(title, title_rect)
         
         # Subtitle
-        subtitle = self.font_subtitle.render("SCOREBOARD - Top Killers", True, (255, 255, 255))
+        subtitle = self.font_subtitle.render(self.language.get('scoreboard'), True, (255, 255, 255))
         subtitle_rect = subtitle.get_rect(center=(surface.get_width() // 2, 180))
         surface.blit(subtitle, subtitle_rect)
         
@@ -65,7 +70,8 @@ class VictoryScreen:
             name_surface = self.font_scoreboard.render(name, True, (255, 255, 255))
             
             # Kills
-            kills_text = f"{kills} kill{'s' if kills != 1 else ''}"
+            kill_word = self.language.get('kills') if kills != 1 else self.language.get('kill')
+            kills_text = f"{kills} {kill_word}"
             kills_color = (200, 200, 200) if kills > 0 else (100, 100, 100)
             kills_surface = self.font_scoreboard.render(kills_text, True, kills_color)
             
@@ -79,19 +85,19 @@ class VictoryScreen:
         
         # Show total if more than max_display
         if len(scoreboard) > max_display:
-            more_text = f"... and {len(scoreboard) - max_display} more"
+            more_text = f"{self.language.get('and_more')} {len(scoreboard) - max_display} {self.language.get('more')}"
             more_surface = self.font_scoreboard.render(more_text, True, (150, 150, 150))
             more_rect = more_surface.get_rect(center=(surface.get_width() // 2, y + 10))
             surface.blit(more_surface, more_rect)
         
         # Show total count
-        total_text = f"Total: {len(scoreboard)} {winner_kind}s"
+        total_text = f"{self.language.get('total_count')}: {len(scoreboard)} {self.language.get(winner_kind + 's')}"
         total_surface = self.font_scoreboard.render(total_text, True, (180, 180, 180))
         total_rect = total_surface.get_rect(center=(surface.get_width() // 2, y + 40))
         surface.blit(total_surface, total_rect)
         
         # Instructions
-        instructions = self.font_scoreboard.render("Press C to clear and start new game", True, (255, 255, 100))
+        instructions = self.font_scoreboard.render(self.language.get('press_c'), True, (255, 255, 100))
         inst_rect = instructions.get_rect(center=(surface.get_width() // 2, surface.get_height() - 50))
         surface.blit(instructions, inst_rect)
     

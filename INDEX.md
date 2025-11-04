@@ -7,8 +7,9 @@ Welcome to the Rock-Paper-Scissors World project! This index will help you find 
 **New to the project? Start here:**
 
 1. **[QUICKSTART.md](QUICKSTART.md)** - Get running in 3 steps (5 minutes)
-2. **[README.md](README.md)** - Project overview and features
-3. **[SETUP.md](SETUP.md)** - Detailed installation guide
+2. **[README.md](README.md)** - Project overview and features (English)
+3. **[README.ro.md](README.ro.md)** - Prezentare generală proiect și caracteristici (Română) 🇷🇴
+4. **[SETUP.md](SETUP.md)** - Detailed installation guide
 
 ## 📖 User Documentation
 
@@ -17,7 +18,9 @@ Welcome to the Rock-Paper-Scissors World project! This index will help you find 
 - **[USAGE_EXAMPLES.md](USAGE_EXAMPLES.md)** - How to use the app, experiment scenarios
 - **[VISUAL_GUIDE.md](VISUAL_GUIDE.md)** - What you'll see, visual elements explained
 - **[QUICKSTART.md](QUICKSTART.md)** - Quick start guide
-- **[README.md](README.md)** - Controls reference and basic info
+- **[README.md](README.md)** - Controls reference and basic info (English)
+- **[README.ro.md](README.ro.md)** - Referință comenzi și informații de bază (Română) 🇷🇴
+- **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - Quick reference with all controls
 
 ## 👨‍💻 Developer Documentation
 
@@ -34,7 +37,8 @@ Welcome to the Rock-Paper-Scissors World project! This index will help you find 
 RPS/
 ├── 📄 Documentation Files
 │   ├── INDEX.md              ← You are here
-│   ├── README.md             ← Start here
+│   ├── README.md             ← Start here (English)
+│   ├── README.ro.md          ← Începe aici (Română) 🇷🇴
 │   ├── QUICKSTART.md         ← 3-step guide
 │   ├── SETUP.md              ← Installation
 │   ├── USAGE_EXAMPLES.md     ← How to use
