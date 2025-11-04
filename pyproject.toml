@@ -19,6 +19,6 @@ dependencies = [
 rps-world = "rps.app:main"
 
 [project.urls]
-Homepage = "https://github.com/cretzuwashere/RPS"
-Repository = "https://github.com/cretzuwashere/RPS"
+Homepage = "https://github.com/cretzuwashere/rock-paper-scissors-game"
+Repository = "https://github.com/cretzuwashere/rock-paper-scissors-game"
 

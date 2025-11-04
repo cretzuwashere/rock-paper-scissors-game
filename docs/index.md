@@ -24,8 +24,8 @@ A dynamic simulation where autonomous agents (Rock, Paper, Scissors) move, hunt,
 Clone and run in 3 simple steps:
 
 ```bash
-git clone https://github.com/cretzuwashere/RPS.git
-cd RPS
+git clone https://github.com/cretzuwashere/rock-paper-scissors-game.git
+cd rock-paper-scissors-game
 pip install -r requirements.txt
 python -m rps.app
 ```
@@ -62,10 +62,10 @@ Agents actively hunt their prey across the entire board. When they collide, the 
 
 ## 📚 Documentation
 
-- [Quick Reference Guide](https://github.com/cretzuwashere/RPS/blob/master/QUICK_REFERENCE.md)
-- [Setup Instructions](https://github.com/cretzuwashere/RPS/blob/master/SETUP.md)
-- [Development Plan](https://github.com/cretzuwashere/RPS/blob/master/RPS-plan.txt)
-- [Usage Examples](https://github.com/cretzuwashere/RPS/blob/master/USAGE_EXAMPLES.md)
+- [Quick Reference Guide](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/QUICK_REFERENCE.md)
+- [Setup Instructions](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/SETUP.md)
+- [Development Plan](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/RPS-plan.txt)
+- [Usage Examples](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/USAGE_EXAMPLES.md)
 
 ## 🤝 Contributing
 
@@ -78,7 +78,7 @@ python run_tests.py
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see [LICENSE](https://github.com/cretzuwashere/RPS/blob/master/LICENSE) for details.
+This project is licensed under the **MIT License** - see [LICENSE](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/LICENSE) for details.
 
 ---
 

@@ -56,7 +56,7 @@ git push origin master
    - Branch: `master` (or `main`)
    - Folder: `/docs`
 5. Click **Save**
-6. Wait 1-2 minutes, then visit: `https://cretzuwashere.github.io/RPS/`
+6. Wait 1-2 minutes, then visit: `https://cretzuwashere.github.io/rock-paper-scissors-game/`
 
 ### Step 3: Add Repository Topics
 
@@ -84,7 +84,7 @@ This image will appear when someone shares your repo on social media!
 
 1. On your repo's main page, click the **⚙️ gear icon** next to "About"
 2. Add description: "Rock–Paper–Scissors world simulation with named agents, hunting behavior, and victory detection - built with Python & Pygame"
-3. Add website: `https://cretzuwashere.github.io/RPS/`
+3. Add website: `https://cretzuwashere.github.io/rock-paper-scissors-game/`
 4. Check ☑️ "Releases" if you plan to create releases later
 5. Click **Save changes**
 

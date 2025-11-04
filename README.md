@@ -1,6 +1,6 @@
 # 🪨 Rock–Paper–Scissors World ✂️
 
-![Python CI](https://github.com/cretzuwashere/RPS/workflows/Python%20CI/badge.svg)
+![Python CI](https://github.com/cretzuwashere/rock-paper-scissors-game/workflows/Python%20CI/badge.svg)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-green)
@@ -12,7 +12,7 @@ A Python application with a graphical interface that simulates a Rock–Paper–
 > 
 > **Română?** Vezi **[README.ro.md](README.ro.md)** pentru versiunea în limba română! 🇷🇴
 >
-> **Live Demo:** [GitHub Pages](https://cretzuwashere.github.io/RPS/)
+> **Live Demo:** [GitHub Pages](https://cretzuwashere.github.io/rock-paper-scissors-game/)
 
 ## Features
 
@@ -36,8 +36,8 @@ A Python application with a graphical interface that simulates a Rock–Paper–
 
 ```bash
 # Clone the repository
-git clone https://github.com/cretzuwashere/RPS.git
-cd RPS
+git clone https://github.com/cretzuwashere/rock-paper-scissors-game.git
+cd rock-paper-scissors-game
 
 # Create a virtual environment (optional but recommended)
 python -m venv venv
