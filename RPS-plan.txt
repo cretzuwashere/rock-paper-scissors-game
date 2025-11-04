@@ -1,0 +1,219 @@
+## Rock–Paper–Scissors World — Complete Development Plan (Python + Pygame)
+
+### 1) High-level architecture
+- **Modules**
+  - **entrypoint (`app.py`)**: initializes Pygame, loads config, constructs `World`, runs game loop.
+  - **core/agent.py**: base `Agent` and subclasses `Rock`, `Paper`, `Scissors`.
+  - **core/world.py**: `World` orchestrates agents, updates, collisions, spawning, and analysis hooks.
+  - **core/collision.py**: collision detection and resolution strategies (circle/rect checks, broad-phase grid).
+  - **core/spatial.py**: optional `SpatialHashGrid` to optimize neighbor queries.
+  - **core/config.py**: constants, tunables, seed management.
+  - **ui/hud.py**: on-screen counters, FPS, status, controls hint; optional sidebar overlay.
+  - **analysis/logger.py**: capture spawn coordinates, interactions, outcomes; CSV/JSON exporters.
+  - **assets/**: small PNGs or simple vector draws for sprites.
+  - **tests/**: unit/integration tests (headless Pygame), deterministic with seeds.
+
+- **Runtime data flow**
+  - `app.py` → create `World` with `Config` → main loop: handle events → `World.update(dt)` → `World.resolve_collisions()` → draw: `World.draw(surface)` → HUD → flip.
+  - `World` uses `SpatialHashGrid` for broad-phase; `collision` module for narrow-phase checks and Rock–Paper–Scissors resolution.
+  - `analysis.logger` observes spawn/collision events emitted by `World`.
+
+- **Target directory layout**
+  - `rps/app.py`
+  - `rps/core/{agent.py, world.py, collision.py, spatial.py, config.py}`
+  - `rps/ui/hud.py`
+  - `rps/analysis/{logger.py, exporter.py}`
+  - `rps/assets/sprites/{rock.png,paper.png,scissors.png}` (or draw primitives)
+  - `tests/`
+
+### 2) Class design
+- **Base: `Agent` (pygame.sprite.Sprite or plain object)**
+  - Attributes: `id`, `kind` ('rock'|'paper'|'scissors'), `pos: Vector2`, `vel: Vector2`, `speed: float`, `radius: int`, `sprite: Surface`, `rect: Rect`, `alive: bool`, `last_collision_tick: int`, `rng`.
+  - Methods:
+    - `update(dt, bounds)`: integrate position, apply boundary behavior (wrap or bounce), update `rect`.
+    - `draw(surface)`: blit sprite or draw circle.
+    - `collides_with(other) -> bool`: circle or rect overlap.
+    - `compare(other) -> int`: -1 lose, 0 tie, +1 win (implemented via shared rules table).
+    - `on_collision(other, now_tick) -> CollisionOutcome`: determine winner/loser; apply cooldown.
+    - `kill()`: mark `alive=False` (removed by `World`).
+
+- **Subclasses: `Rock(Agent)`, `Paper(Agent)`, `Scissors(Agent)`**
+  - Override `kind`, set default `color/sprite`, `radius`, `speed_range`.
+  - Use shared `BEATS = { 'rock': 'scissors', 'paper': 'rock', 'scissors': 'paper' }` for `compare`.
+
+- **World**
+  - Attributes: `agents: list[Agent]`, `by_kind: dict[str, list[Agent]]`, `grid: SpatialHashGrid|None`, `tick: int`, `rng`, `logger`.
+  - Methods: `spawn(kind, pos, vel?)`, `spawn_random(n_per_kind)`, `update(dt)`, `resolve_collisions()`, `remove_dead()`, `draw(surface)`, `reset()`.
+
+- **SpatialHashGrid (optional initially)**
+  - Cell size ≈ max(2*radius).
+  - `insert(agent)`, `update(agent, old_cell)`, `neighbors(agent)` to limit narrow-phase checks.
+
+- **AnalysisLogger**
+  - `log_spawn(id, kind, x, y, t)`; `log_collision(winner_id, winner_kind, loser_id, loser_kind, x, y, t)`; `export_csv(path)`; `clear()`.
+
+### 3) Collision handling logic
+- **Detection**
+  - Start with O(n²) pair checks for small populations; upgrade to spatial hash for performance.
+  - Use circle collision: `(pos1 - pos2).length_squared() <= (r1 + r2)^2`.
+  - Same-kind collisions: either ignore or soft-bounce (optional feature flag).
+
+- **Resolution**
+  - Determine outcome using `BEATS` mapping:
+    - If `a.kind == b.kind`: tie → optional bounce.
+    - Else if `BEATS[a.kind] == b.kind`: `a` wins; else `b` wins.
+  - Remove loser: call `loser.kill()`; winner persists; optionally tweak winner velocity slightly to reduce re-collide.
+  - Apply per-agent collision cooldown (e.g., 6–10 frames) to prevent immediate re-processing.
+  - Determinism: when multiple collisions involve the same agent in a frame, process pairs in stable order (by increasing `(min(id_a,id_b), max(...))`).
+  - Multi-contact edge cases: if an agent wins against one and would lose against a different agent in the same frame, process stable order; dead agents skip subsequent pairs.
+
+### 4) Game loop & event system
+- **Main loop**
+  - `clock = pygame.time.Clock()` → while running:
+    - Handle events (QUIT, key presses, mouse clicks for manual spawn).
+    - Compute `dt = clock.tick(fps)/1000.0`.
+    - `world.update(dt)` → integrates movement, updates grid.
+    - `world.resolve_collisions()` → logs outcomes, removes losers.
+    - Clear screen → `world.draw(surface)` → `hud.draw(surface)` → `pygame.display.flip()`.
+
+- **Controls** (default)
+  - `R/P/S` to spawn respective kind at mouse position; `Space` pause/resume; `C` clear; `D` toggle debug; `1/2/3` spawn batches; `F9` export analysis CSV; `F5` reseed.
+  - Optional UI buttons mirrored for mouse users.
+
+### 5) Spawning and analysis system
+- **Spawning**
+  - Random spawn: uniformly within playfield; random direction and speed within per-kind ranges.
+  - Manual spawn: click to place one; shift-click to place many in a small jitter radius.
+  - Scenario files (JSON): predefined coordinates for reproducible experiments.
+
+- **Analysis** (outcomes vs spawn coordinates)
+  - Record for each spawn: `(id, kind, x, y, t0)`.
+  - Record for each collision: `(winner_id, winner_kind, loser_id, loser_kind, x, y, t_collision)`.
+  - Post-process utilities:
+    - Count survivors by kind; time to extinction per kind.
+    - Per-spawn heat: map initial `(x,y)` to survival likelihood or time-to-first-collision.
+    - Export CSV/JSON; enable deterministic replay via stored seed + scenario.
+
+### 6) Data structures
+- `agents: list[Agent]` (iterate for updates/draws).
+- `by_kind: dict[str, list[Agent]]` (fast counters and spawning).
+- `id_to_agent: dict[int, Agent]` (for logging lookups).
+- `SpatialHashGrid`: `dict[Cell, set[int]]` for neighbor queries.
+- `AnalysisLogger`: in-memory `list[SpawnEvent]`, `list[CollisionEvent]` with `dataclass` types; optional rolling window.
+- `Config`: `dataclass` with screen size, fps, speeds, radii, colors, cooldown frames, wrap/bounce mode, seed.
+
+### 7) UI design (minimal)
+- **Playfield**: full window or left 80%.
+- **HUD overlay** (top-left):
+  - Counts: Rock/Paper/Scissors alive; Interactions; FPS; Seed; Paused indicator.
+  - Short help line with keybinds.
+- **Optional sidebar**
+  - Buttons: Spawn Rock/Paper/Scissors (+10), Reset, Export CSV, Toggle Wrap/Bounce.
+  - Sliders: population cap, speed multiplier.
+
+### 8) Development roadmap
+1. Project scaffolding: venv, dependencies (pygame, numpy optional), basic `app.py` window.
+2. Implement `Agent` base (movement, wrap/bounce), draw primitive circle placeholder.
+3. Add subclasses `Rock/Paper/Scissors` with distinct colors/sizes/speeds.
+4. Naive collision detection (O(n²)), circle checks; implement R–P–S resolution and removal.
+5. World orchestration (`World`), ticking, spawn APIs, stable pair ordering, cooldown.
+6. HUD overlay with counters/FPS and basic keybinds for spawning/pause/reset.
+7. Analysis logger: record spawns/collisions; CSV export.
+8. Manual spawn at mouse; batch spawn and scenario loader (JSON).
+9. Spatial optimization (`SpatialHashGrid`), toggleable; profiling for larger populations.
+10. Replace circles with sprites; basic asset loader and scaling.
+11. Deterministic replay (seed + scenario); CLI args for seed and scenario path.
+12. Cleanup, documentation, and packaging.
+
+### 9) Testing strategy
+- **Environment**: headless Pygame (`SDL_VIDEODRIVER=dummy`) in CI; fixed RNG seed per test.
+- **Unit tests**
+  - `compare()` correctness for all pairs and ties.
+  - Circle collision predicate correctness (hit/miss boundaries; radii edge cases).
+  - Boundary behavior (wrap/bounce) preserves invariants.
+  - Cooldown prevents duplicate outcomes across adjacent frames.
+- **Integration tests**
+  - Deterministic scenario: spawn specific positions/velocities to assert exact winners/losers and event log content.
+  - Multi-collision frame stability: process order deterministic; dead agents not reused.
+  - Analysis export creates expected CSV headers/rows; temp files cleaned after tests.
+- **Property-based tests** (optional, with Hypothesis)
+  - For random placements, no ghost agents (counts consistent); losers removed exactly once; no collisions reported between non-overlapping agents.
+
+### 10) Future extensions
+- Sounds on collision and victory particles.
+- Settings panel (speeds, radii, counts, wrap/bounce, cooldown).
+- Heatmap visualizations over spawn coordinates; in-app charts.
+- Obstacles or walls changing paths; portals.
+- QuadTree alternative to spatial hash; GPU-accelerated checks (NumPy/Cython) for very large populations.
+- Recording/playback to video; screenshot series.
+- Networked mode (synchronize seeds/events) for shared experiments.
+
+### Appendix: minimal code skeletons
+```python
+# Agent/World skeletons (illustrative)
+class Agent:
+    def __init__(self, id_, kind, pos, vel, radius, sprite=None):
+        self.id = id_
+        self.kind = kind
+        self.pos = pygame.Vector2(pos)
+        self.vel = pygame.Vector2(vel)
+        self.radius = radius
+        self.alive = True
+        self.last_collision_tick = -10**9
+
+    def update(self, dt, bounds, wrap=True):
+        self.pos += self.vel * dt
+        # wrap
+        if wrap:
+            w, h = bounds
+            self.pos.x %= w
+            self.pos.y %= h
+
+    def collides_with(self, other):
+        r = self.radius + other.radius
+        return self.pos.distance_squared_to(other.pos) <= r * r
+
+BEATS = { 'rock': 'scissors', 'paper': 'rock', 'scissors': 'paper' }
+
+def compare(a, b):
+    if a.kind == b.kind:
+        return 0
+    return 1 if BEATS[a.kind] == b.kind else -1
+
+class World:
+    def __init__(self, size, logger):
+        self.size = size
+        self.agents = []
+        self.tick = 0
+        self.logger = logger
+
+    def update(self, dt):
+        for a in self.agents:
+            if a.alive:
+                a.update(dt, self.size)
+        self.resolve_collisions()
+        self.agents = [a for a in self.agents if a.alive]
+
+    def resolve_collisions(self):
+        pairs = []
+        n = len(self.agents)
+        for i in range(n):
+            ai = self.agents[i]
+            if not ai.alive:
+                continue
+            for j in range(i + 1, n):
+                aj = self.agents[j]
+                if ai.alive and aj.alive and ai.collides_with(aj):
+                    pairs.append((ai, aj))
+        for a, b in pairs:
+            if not (a.alive and b.alive):
+                continue
+            outcome = compare(a, b)
+            if outcome > 0:
+                b.alive = False
+            elif outcome < 0:
+                a.alive = False
+            # ties: optional bounce
+```
+
+

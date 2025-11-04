@@ -1,0 +1,132 @@
+# Rock–Paper–Scissors World
+
+A Python application with a graphical interface that simulates a Rock–Paper–Scissors world where objects move and interact according to the classic game rules.
+
+> **New here?** Check out **[START_HERE.md](START_HERE.md)** for a quick 3-step guide! 🚀
+
+## Features
+
+- Three types of objects (Rock, Paper, Scissors) that move freely across the screen
+- **Named agents** - Each agent has a unique name (Boulder, Scroll, Blade, etc.) 🏷️
+- **Kill tracking** - Agents track their eliminations for scoreboard rankings 🏆
+- **Victory detection** - Game automatically detects when one faction wins! 🎉
+- **Scoreboard** - Beautiful victory screen showing top killers with gold/silver/bronze ranks
+- **Global hunting** - Agents hunt prey across the entire board (no range limit) 🎯
+- **Clueless prey** - Prey acts unaware of danger (no flee behavior) 😴
+- **Factory pattern** - Clean, extensible agent creation system
+- **Random spawn** - Press `B` for random numbers of each faction (10-40 each)
+- Collision-based interactions following classic R-P-S rules
+- Real-time visualization with Pygame
+- Toggleable hunting mode (press `H`)
+- Analysis and logging of interactions
+- Spawn objects manually or in batches
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+## Running the Application
+
+```bash
+python -m rps.app
+```
+
+## Controls
+
+### Spawning
+- `R` - Spawn Rock at mouse position
+- `P` - Spawn Paper at mouse position
+- `S` - Spawn Scissors at mouse position
+- `1` - Spawn 10 Rocks randomly
+- `2` - Spawn 10 Papers randomly
+- `3` - Spawn 10 Scissors randomly
+- `B` - Random spawn (30-60 of each faction) ⭐ NEW!
+
+### Game Control
+- `Space` - Pause/Resume
+- `H` - Toggle hunting behavior
+- `N` - Toggle names display (show/hide agent names)
+- `C` - Clear all objects (also resets victory screen)
+- `D` - Toggle debug mode
+- `F5` - New random seed + auto-spawn balanced population
+- `ESC` - Quit
+
+### Analysis
+- `F9` - Export analysis to CSV
+
+## Project Structure
+
+```
+rps/
+├── app.py              # Main entry point
+├── core/
+│   ├── agent.py        # Base Agent and subclasses
+│   ├── world.py        # World orchestration
+│   ├── collision.py    # Collision detection/resolution
+│   ├── config.py       # Configuration and constants
+│   └── spatial.py      # Spatial optimization (future)
+├── ui/
+│   └── hud.py          # HUD overlay
+├── analysis/
+│   ├── logger.py       # Event logging
+│   └── exporter.py     # Data export utilities
+└── assets/
+    └── sprites/        # Sprite images
+
+tests/                  # Unit and integration tests
+```
+
+## Game Rules
+
+- Rock beats Scissors (and hunts them globally!)
+- Paper beats Rock (and hunts them globally!)
+- Scissors beat Paper (and hunt them globally!)
+- When objects collide, the loser disappears and the winner continues
+- **Agents hunt prey across the entire board** (global detection)
+- **Prey acts clueless** - no flee behavior, unaware of danger
+- **Victory** - When only one faction remains, game shows scoreboard with top killers
+- Each agent tracks kills and has a unique name (e.g., "Boulder", "Scroll", "Blade")
+
+## Documentation
+
+- **`QUICK_REFERENCE.md`** - Quick reference guide with all controls and features ⭐
+- **`RPS-plan.txt`** - Complete development plan and architecture details
+- **`SETUP.md`** - Detailed setup and installation instructions
+- **`USAGE_EXAMPLES.md`** - Usage examples and experimental scenarios
+
+## Implementation Status
+
+✅ Complete implementation with:
+- Agent base class with Rock/Paper/Scissors subclasses
+- Physics simulation (movement, wrap/bounce boundaries)
+- Collision detection and resolution
+- World orchestration and state management
+- HUD overlay with real-time statistics
+- Event logging and CSV export for analysis
+- Enhanced sprite graphics for each agent type
+- Comprehensive test suite
+- Command-line interface with options
+- Deterministic reproduction via seed control
+
+## Development
+
+The project follows Test-Driven Development principles. All core components have unit tests.
+
+Run tests with:
+```bash
+python run_tests.py
+```
+
+## Future Enhancements
+
+Potential extensions as outlined in the development plan:
+- Spatial hash grid for performance optimization with large populations
+- Sound effects for collisions
+- Settings UI panel
+- Heatmap visualizations
+- Obstacles and walls
+- Replay/recording to video
+- Scenario file loader (JSON format)
+

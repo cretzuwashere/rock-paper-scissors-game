@@ -1,0 +1,11 @@
+Victory detected! Winner: rock
+Total agents in history: 0
+Winner agents: 0
+Current alive agents: 1
+
+All history kinds:
+  rock: 0
+  paper: 0
+  scissors: 0
+
+No winner agents found!
