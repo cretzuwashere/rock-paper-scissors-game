@@ -1,10 +1,18 @@
-# Rock–Paper–Scissors World
+# 🪨 Rock–Paper–Scissors World ✂️
 
-A Python application with a graphical interface that simulates a Rock–Paper–Scissors world where objects move and interact according to the classic game rules.
+![Python CI](https://github.com/cretzuwashere/RPS/workflows/Python%20CI/badge.svg)
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-green)
+![Pygame](https://img.shields.io/badge/Pygame-2.5.0+-orange)
+
+A Python application with a graphical interface that simulates a Rock–Paper–Scissors world where agents move, hunt, and interact according to the classic game rules.
 
 > **New here?** Check out **[START_HERE.md](START_HERE.md)** for a quick 3-step guide! 🚀
 > 
 > **Română?** Vezi **[README.ro.md](README.ro.md)** pentru versiunea în limba română! 🇷🇴
+>
+> **Live Demo:** [GitHub Pages](https://cretzuwashere.github.io/RPS/)
 
 ## Features
 
@@ -24,16 +32,29 @@ A Python application with a graphical interface that simulates a Rock–Paper–
 - Analysis and logging of interactions
 - Spawn objects manually or in batches
 
-## Installation
+## 🚀 Quick Start
 
 ```bash
+# Clone the repository
+git clone https://github.com/cretzuwashere/RPS.git
+cd RPS
+
+# Create a virtual environment (optional but recommended)
+python -m venv venv
+source venv/bin/activate   # On Windows use: venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Run the game
+python -m rps.app
 ```
 
-## Running the Application
+Or install as a package:
 
 ```bash
-python -m rps.app
+pip install -e .
+rps-world
 ```
 
 ## Controls

@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rps-world"
+version = "0.1.0"
+description = "Rock–Paper–Scissors world simulation with Pygame - agents move, hunt, and battle!"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name="cretzuwashere"}]
+requires-python = ">=3.10"
+dependencies = [
+    "pygame>=2.5.0",
+    "numpy>=1.24.0"
+]
+
+[project.scripts]
+rps-world = "rps.app:main"
+
+[project.urls]
+Homepage = "https://github.com/cretzuwashere/RPS"
+Repository = "https://github.com/cretzuwashere/RPS"
+
