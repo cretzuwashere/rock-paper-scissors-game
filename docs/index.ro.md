@@ -34,30 +34,24 @@ O simulare dinamică unde agenți autonomi (Piatră, Hârtie, Foarfece) se mișc
 
 ### Pasul 1: Descarcă Jocul
 
-**Opțiunea A: Folosind Git** (dacă îl ai)
-```bash
-git clone https://github.com/cretzuwashere/rock-paper-scissors-game.git
-cd rock-paper-scissors-game
-```
-
-**Opțiunea B: Descărcare Directă** (mai ușor pentru începători)
 1. Mergi la [github.com/cretzuwashere/rock-paper-scissors-game](https://github.com/cretzuwashere/rock-paper-scissors-game)
 2. Click pe butonul verde **"Code"**
 3. Click pe **"Download ZIP"**
-4. Extrage fișierul ZIP
-5. Deschide Command Prompt în acel folder (Shift + Click-dreapta → "Open PowerShell window here")
+4. Extrage fișierul ZIP pe Desktop
 
-### Pasul 2: Instalează Dependențele
+### Pasul 2 & 3: Instalează & Rulează (SUPER UȘOR!)
 
+**Utilizatori Windows:**
+- **Dublu-click pe `install.bat`** (instalează tot automat)
+- **Dublu-click pe `run.bat`** (pornește jocul)
+
+**Mac/Linux sau dacă fișierele .bat nu funcționează:**
 ```bash
 pip install -r requirements.txt
+python run.py
 ```
 
-### Pasul 3: Rulează Jocul!
-
-```bash
-python -m rps.app
-```
+**Asta e tot!** 🎉
 
 **Comenzi Rapide:**
 - Apasă `B` pentru a crea o bătălie

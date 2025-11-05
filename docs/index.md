@@ -34,30 +34,24 @@ A dynamic simulation where autonomous agents (Rock, Paper, Scissors) move, hunt,
 
 ### Step 1: Download the Game
 
-**Option A: Using Git** (if you have it)
-```bash
-git clone https://github.com/cretzuwashere/rock-paper-scissors-game.git
-cd rock-paper-scissors-game
-```
-
-**Option B: Direct Download** (easier for beginners)
 1. Go to [github.com/cretzuwashere/rock-paper-scissors-game](https://github.com/cretzuwashere/rock-paper-scissors-game)
 2. Click the green **"Code"** button
 3. Click **"Download ZIP"**
-4. Extract the ZIP file
-5. Open Command Prompt in that folder (Shift + Right-click → "Open PowerShell window here")
+4. Extract the ZIP file to your Desktop
 
-### Step 2: Install Dependencies
+### Step 2 & 3: Install & Run (SUPER EASY!)
 
+**Windows Users:**
+- **Double-click `install.bat`** (installs everything automatically)
+- **Double-click `run.bat`** (launches the game)
+
+**Mac/Linux or if .bat files don't work:**
 ```bash
 pip install -r requirements.txt
+python run.py
 ```
 
-### Step 3: Run the Game!
-
-```bash
-python -m rps.app
-```
+**That's it!** 🎉
 
 **Quick Controls:**
 - Press `B` to spawn a battle

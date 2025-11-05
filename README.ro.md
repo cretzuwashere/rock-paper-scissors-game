@@ -34,25 +34,30 @@ O aplicație Python cu interfață grafică care simulează o lume Piatră–Hâ
 
 ## 🚀 Început Rapid
 
-### Pentru Începători Completi (Windows)
+### Pentru Începători Completi (Windows) - METODA CEA MAI UȘOARĂ
 
 **Nu ai Python instalat?**
 1. Descarcă de la [python.org/downloads](https://www.python.org/downloads/)
 2. Rulează installerul, ✅ bifează "Add Python to PATH"
 3. Repornește calculatorul
 
-**Descarcă Jocul:**
+**Descarcă & Joacă:**
 1. Click pe butonul verde **"Code"** de mai sus → **"Download ZIP"**
 2. Extrage fișierul ZIP pe Desktop
-3. Deschide folderul, Shift+Click-dreapta → "Open PowerShell window here"
+3. **Dublu-click pe `install.bat`** ← Acesta instalează tot!
+4. **Dublu-click pe `run.bat`** ← Acesta pornește jocul!
 
-**Rulează aceste comenzi una câte una:**
+**Asta e tot!** Apasă `B` pentru o bătălie! 🎮
+
+---
+
+### Metodă Alternativă (Orice SO)
+
 ```bash
+# Dacă ai clonat cu Git sau fișierele .bat nu funcționează:
 pip install -r requirements.txt
-python -m rps.app
+python run.py
 ```
-
-**Comenzi Rapide:** Apasă `B` pentru a începe o bătălie!
 
 ---
 
@@ -63,19 +68,17 @@ python -m rps.app
 git clone https://github.com/cretzuwashere/rock-paper-scissors-game.git
 cd rock-paper-scissors-game
 
-# Creează un mediu virtual (recomandat)
+# Opțiunea 1: Folosește scripturile furnizate
+./install.bat    # Windows
+python run.py
+
+# Opțiunea 2: Configurare manuală cu mediu virtual
 python -m venv venv
 source venv/bin/activate   # Pe Windows: venv\Scripts\activate
-
-# Instalează dependențele
 pip install -r requirements.txt
-
-# Rulează jocul
 python -m rps.app
-```
 
-**Instalează ca pachet:**
-```bash
+# Opțiunea 3: Instalează ca pachet
 pip install -e .
 rps-world
 ```
