@@ -1,8 +1,18 @@
-# Lumea Piatră–Hârtie–Foarfece
+# 🪨 Lumea Piatră–Hârtie–Foarfece ✂️
 
-O aplicație Python cu interfață grafică care simulează o lume Piatră–Hârtie–Foarfece unde obiectele se mișcă și interacționează conform regulilor clasice ale jocului.
+![Python CI](https://github.com/cretzuwashere/rock-paper-scissors-game/workflows/Python%20CI/badge.svg)
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-green)
+![Pygame](https://img.shields.io/badge/Pygame-2.5.0+-orange)
 
-> **Nou aici?** Verifică **[START_HERE.md](START_HERE.md)** pentru un ghid rapid în 3 pași! 🚀
+O aplicație Python cu interfață grafică care simulează o lume Piatră–Hârtie–Foarfece unde agenții se mișcă, vânează și interacționează conform regulilor clasice ale jocului.
+
+> **Nou aici?** Verifică **[QUICKSTART.ro.md](QUICKSTART.ro.md)** pentru un ghid rapid în 3 pași! 🚀
+> 
+> **English?** See **[README.md](README.md)** for the English version! 🇬🇧
+>
+> **Demo Live:** [GitHub Pages](https://cretzuwashere.github.io/rock-paper-scissors-game/)
 
 ## Caracteristici
 
@@ -22,16 +32,52 @@ O aplicație Python cu interfață grafică care simulează o lume Piatră–Hâ
 - Analiză și înregistrare interacțiuni
 - Creează obiecte manual sau în loturi
 
-## Instalare
+## 🚀 Început Rapid
 
+### Pentru Începători Completi (Windows)
+
+**Nu ai Python instalat?**
+1. Descarcă de la [python.org/downloads](https://www.python.org/downloads/)
+2. Rulează installerul, ✅ bifează "Add Python to PATH"
+3. Repornește calculatorul
+
+**Descarcă Jocul:**
+1. Click pe butonul verde **"Code"** de mai sus → **"Download ZIP"**
+2. Extrage fișierul ZIP pe Desktop
+3. Deschide folderul, Shift+Click-dreapta → "Open PowerShell window here"
+
+**Rulează aceste comenzi una câte una:**
 ```bash
 pip install -r requirements.txt
+python -m rps.app
 ```
 
-## Rulare Aplicație
+**Comenzi Rapide:** Apasă `B` pentru a începe o bătălie!
+
+---
+
+### Pentru Programatori
 
 ```bash
+# Clonează repository-ul
+git clone https://github.com/cretzuwashere/rock-paper-scissors-game.git
+cd rock-paper-scissors-game
+
+# Creează un mediu virtual (recomandat)
+python -m venv venv
+source venv/bin/activate   # Pe Windows: venv\Scripts\activate
+
+# Instalează dependențele
+pip install -r requirements.txt
+
+# Rulează jocul
 python -m rps.app
+```
+
+**Instalează ca pachet:**
+```bash
+pip install -e .
+rps-world
 ```
 
 ## Comenzi

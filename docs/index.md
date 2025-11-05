@@ -6,6 +6,8 @@ Welcome to the **Rock–Paper–Scissors World** - an interactive simulation bui
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 ![Pygame](https://img.shields.io/badge/Pygame-2.5.0+-orange)
 
+**English Version** | **[Versiune Română](index.ro.md)**
+
 ## 🎮 About
 
 A dynamic simulation where autonomous agents (Rock, Paper, Scissors) move, hunt, and battle in real-time. Watch as populations rise and fall, with victory screens celebrating the champions!
@@ -21,14 +23,46 @@ A dynamic simulation where autonomous agents (Rock, Paper, Scissors) move, hunt,
 
 ## 🚀 Play It Locally
 
-Clone and run in 3 simple steps:
+### Step 0: Install Python (if you don't have it)
 
+**Windows:**
+1. Download Python from [python.org/downloads](https://www.python.org/downloads/)
+2. Run the installer
+3. ✅ **IMPORTANT:** Check "Add Python to PATH" during installation
+4. Click "Install Now"
+5. Verify: Open Command Prompt and type `python --version`
+
+### Step 1: Download the Game
+
+**Option A: Using Git** (if you have it)
 ```bash
 git clone https://github.com/cretzuwashere/rock-paper-scissors-game.git
 cd rock-paper-scissors-game
+```
+
+**Option B: Direct Download** (easier for beginners)
+1. Go to [github.com/cretzuwashere/rock-paper-scissors-game](https://github.com/cretzuwashere/rock-paper-scissors-game)
+2. Click the green **"Code"** button
+3. Click **"Download ZIP"**
+4. Extract the ZIP file
+5. Open Command Prompt in that folder (Shift + Right-click → "Open PowerShell window here")
+
+### Step 2: Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+### Step 3: Run the Game!
+
+```bash
 python -m rps.app
 ```
+
+**Quick Controls:**
+- Press `B` to spawn a battle
+- Press `Space` to pause
+- Press `L` to switch language (English/Romanian)
 
 ## 🎯 Game Rules
 

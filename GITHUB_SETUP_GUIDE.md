@@ -2,7 +2,25 @@
 
 This guide covers the improvements made to your RPS World repository and the manual steps needed on GitHub.
 
+**🌍 Multilingual Support:** All documentation is now available in **English** and **Romanian** (Română)!
+
 ## ✅ Files Created
+
+### Documentation in Both Languages
+
+**English:**
+- `README.md` - Main repository README with beginner-friendly instructions
+- `docs/index.md` - GitHub Pages landing page
+- `QUICKSTART.md` - Quick start guide
+- `START_HERE.md` - 5-minute getting started guide
+
+**Romanian (Română):**
+- `README.ro.md` - README principal cu instrucțiuni pentru începători
+- `docs/index.ro.md` - Pagină GitHub Pages în română
+- `QUICKSTART.ro.md` - Ghid de început rapid
+- `START_HERE.ro.md` - Ghid de pornire de 5 minute
+
+### Technical Files
 
 ### 1. `.gitattributes`
 Tells GitHub's Linguist to treat documentation as non-code, ensuring the repo is classified as Python.

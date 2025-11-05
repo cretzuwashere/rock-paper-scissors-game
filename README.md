@@ -34,14 +34,38 @@ A Python application with a graphical interface that simulates a Rock–Paper–
 
 ## 🚀 Quick Start
 
+### For Complete Beginners (Windows)
+
+**Don't have Python?**
+1. Download from [python.org/downloads](https://www.python.org/downloads/)
+2. Run installer, ✅ check "Add Python to PATH"
+3. Restart your computer
+
+**Download the Game:**
+1. Click the green **"Code"** button above → **"Download ZIP"**
+2. Extract the ZIP file to your Desktop
+3. Open the folder, Shift+Right-click → "Open PowerShell window here"
+
+**Run these commands one by one:**
+```bash
+pip install -r requirements.txt
+python -m rps.app
+```
+
+**Quick Controls:** Press `B` to start a battle!
+
+---
+
+### For Developers
+
 ```bash
 # Clone the repository
 git clone https://github.com/cretzuwashere/rock-paper-scissors-game.git
 cd rock-paper-scissors-game
 
-# Create a virtual environment (optional but recommended)
+# Create a virtual environment (recommended)
 python -m venv venv
-source venv/bin/activate   # On Windows use: venv\Scripts\activate
+source venv/bin/activate   # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -50,8 +74,7 @@ pip install -r requirements.txt
 python -m rps.app
 ```
 
-Or install as a package:
-
+**Install as a package:**
 ```bash
 pip install -e .
 rps-world
