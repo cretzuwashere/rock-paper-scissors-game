@@ -1,4 +1,4 @@
-# 🪨 Rock–Paper–Scissors World ✂️
+# 🪨 Rock–Paper–Scissors World ✂️ by duril and cretz
 
 ![Python CI](https://github.com/cretzuwashere/rock-paper-scissors-game/workflows/Python%20CI/badge.svg)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
