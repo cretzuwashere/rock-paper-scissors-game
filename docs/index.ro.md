@@ -90,10 +90,15 @@ Agenții vânează activ prada pe întreaga tablă. Când se ciocnesc, cel învi
 
 ## 📚 Documentație
 
-- [Ghid de Referință Rapidă](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/QUICK_REFERENCE.md)
-- [Instrucțiuni de Instalare](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/SETUP.md)
-- [Plan de Dezvoltare](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/RPS-plan.txt)
-- [Exemple de Utilizare](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/USAGE_EXAMPLES.md)
+**În Română:**
+- [Ghid de Început Rapid](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/QUICKSTART.ro.md)
+- [Începe Aici (5 minute)](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/START_HERE.ro.md)
+
+**In English:**
+- [Quick Reference Guide](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/QUICK_REFERENCE.md)
+- [Setup Instructions](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/SETUP.md)
+- [Development Plan](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/RPS-plan.txt)
+- [Usage Examples](https://github.com/cretzuwashere/rock-paper-scissors-game/blob/master/USAGE_EXAMPLES.md)
 
 ## 🤝 Contribuții
 

@@ -120,10 +120,16 @@ rps-world
 
 ## Documentație
 
-- **`QUICK_REFERENCE.md`** - Ghid de referință rapidă cu toate comenzile și caracteristicile ⭐
-- **`RPS-plan.txt`** - Plan complet de dezvoltare și detalii arhitectură
-- **`SETUP.md`** - Instrucțiuni detaliate de instalare și configurare
-- **`USAGE_EXAMPLES.md`** - Exemple de utilizare și scenarii experimentale
+**În Română:**
+- **`QUICKSTART.ro.md`** - Ghid de început rapid ⭐
+- **`START_HERE.ro.md`** - Începe aici (5 minute) 🚀
+- **`README.ro.md`** - Acest fișier - documentație completă
+
+**In English:**
+- **`QUICK_REFERENCE.md`** - Quick reference guide with all controls and features
+- **`RPS-plan.txt`** - Complete development plan and architecture details
+- **`SETUP.md`** - Detailed setup and installation instructions
+- **`USAGE_EXAMPLES.md`** - Usage examples and experimental scenarios
 
 ## Status Implementare
 
